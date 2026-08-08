@@ -5,25 +5,24 @@ export default function Storefront() {
   const [selectedCategory, setSelectedCategory] = useState('Todos');
 
   // Real inventory items parsed from your SumUp screenshots
-  const products = [
-    const products = [
-  {
-    id: "mujer-blusa-sonoma",
-    name: "Mujer Blusa Sonoma",
-    category: "Mujer",
-    condition: "Excelente Estado",
-    price: 15000,
-    image: "https://sumup.com"
-  },
-  {
-    id: "producto-dos",
-    name: "Siguiente Producto",
-    category: "Mujer",
-    condition: "Como Nuevo",
-    price: 12000,
-    image: "https://unsplash.com"
-  }
-];
+      const products = [
+    {
+      id: "mujer-blusa-sonoma",
+      name: "Mujer Blusa Sonoma",
+      category: "Mujer",
+      condition: "Excelente Estado",
+      price: 15000,
+      image: "https://sumup.com"
+    },
+    {
+      id: "producto-dos",
+      name: "Siguiente Producto",
+      category: "Mujer",
+      condition: "Como Nuevo",
+      price: 12000,
+      image: "https://unsplash.com"
+    }
+  ];
   const filteredProducts = selectedCategory === 'Todos' 
     ? products 
     : products.filter(p => p.category === selectedCategory);
