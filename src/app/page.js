@@ -6,14 +6,24 @@ export default function Storefront() {
 
   // Real inventory items parsed from your SumUp screenshots
   const products = [
-    { id: 1, category: "Mujer", title: "Mujer Blusa Sonoma talla XL", price: "$12.000", brand: "Sonoma", tag: "Excelente Estado", image: "https://unsplash.com" },
-    { id: 2, category: "Mujer", title: "Mujer Chaqueta Cuerina WilliamRast", price: "$20.000", brand: "William Rast", tag: "Premium", image: "https://unsplash.com" },
-    { id: 3, category: "Niña", title: "Niña Short Gessica Simpson talla 14", price: "$10.000", brand: "Jessica Simpson", tag: "Excelente Estado", image: "https://unsplash.com" },
-    { id: 4, category: "Niña", title: "Niña Short Rewash talla 5-6", price: "$12.000", brand: "Rewash", tag: "Vintage", image: "https://unsplash.com" },
-    { id: 5, category: "Niña", title: "Niña Tommy Hilfiger talla L 12/14", price: "$15.000", brand: "Tommy Hilfiger", tag: "Excelente Estado", image: "https://unsplash.com" },
-    { id: 6, category: "Niña", title: "Niña Vestido Epic threads talla S y M", price: "$8.000", brand: "Epic Threads", tag: "Segunda Mano", image: "https://unsplash.com" }
-  ];
-
+    const products = [
+  {
+    id: "mujer-blusa-sonoma",
+    name: "Mujer Blusa Sonoma",
+    category: "Mujer",
+    condition: "Excelente Estado",
+    price: 15000,
+    image: "https://sumup.com"
+  },
+  {
+    id: "producto-dos",
+    name: "Siguiente Producto",
+    category: "Mujer",
+    condition: "Como Nuevo",
+    price: 12000,
+    image: "https://unsplash.com"
+  }
+];
   const filteredProducts = selectedCategory === 'Todos' 
     ? products 
     : products.filter(p => p.category === selectedCategory);
