@@ -5,22 +5,39 @@ export default function Storefront() {
   const [selectedCategory, setSelectedCategory] = useState('Todos');
 
   // Real inventory items parsed from your SumUp screenshots
-      const products = [
+        const products = [
     {
       id: "mujer-blusa-sonoma",
       name: "Mujer Blusa Sonoma",
       category: "Mujer",
       condition: "Excelente Estado",
       price: 15000,
-      image: "https://sumup.com"
+      images: [
+        "https://supabase.co",
+        "https://supabase.co"
+      ]
     },
     {
-      id: "producto-dos",
-      name: "Siguiente Producto",
+      id: "mujer-vestido-elegante",
+      name: "Mujer Vestido Elegante",
       category: "Mujer",
       condition: "Como Nuevo",
-      price: 12000,
-      image: "https://unsplash.com"
+      price: 22000,
+      images: [
+        "https://supabase.co",
+        "https://supabase.co",
+        "https://supabase.co"
+      ]
+    },
+    {
+      id: "mujer-chaqueta-cuerina",
+      name: "Mujer Chaqueta Cuerina Black",
+      category: "Mujer",
+      condition: "Excelente Estado",
+      price: 35000,
+      images: [
+        "https://supabase.co"
+      ]
     }
   ];
   const filteredProducts = selectedCategory === 'Todos' 
@@ -72,12 +89,12 @@ export default function Storefront() {
                 {/* Photo Display */}
                 <div className="aspect-[3/4] bg-slate-100 relative overflow-hidden">
                   <img 
-                    src={product.image} 
-                    alt={product.title} 
+                    src={product.images[0]} 
+                    alt={product.name} 
                     className="w-full h-full object-cover"
                   />
                   <span className="absolute bottom-2 right-2 bg-slate-900/80 backdrop-blur-xs text-white text-[10px] px-2 py-0.5 rounded-md font-bold tracking-wide">
-                    {product.tag}
+                    {product.condition}
                   </span>
                 </div>
                 {/* Info Text */}
