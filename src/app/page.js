@@ -9,12 +9,11 @@ export default function Storefront() {
     {
       id: "mujer-blusa-sonoma",
       name: "Mujer Blusa Sonoma",
+      brand: "Sonoma",
       category: "Mujer",
       condition: "Excelente Estado",
       price: 15000,
-      images: [
-        "blusa_sonoma_front.jpg",
-        "blusa_sonoma_back.jpg"
+      images: ["blusa-sonoma-01.png"
       ]
     },
     {
