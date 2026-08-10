@@ -88,7 +88,7 @@ export default function Storefront() {
                 {/* Photo Display */}
                         <div className="aspect-[3/4] bg-slate-100 relative overflow-hidden">
           <img
-            src={`https://ldkbbzdvtdsmbxfypwm.supabase.co/storage/v1/object/public/product-images/${product.images[0]}`}
+            src={`https://etmasufkgyviyvjwhgkp.supabase.co/storage/v1/object/public/product-images/${product.images[0]}`}
             alt={product.name || "Product image"}
             className="w-full h-full object-cover"
           />

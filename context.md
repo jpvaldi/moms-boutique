@@ -6,7 +6,7 @@
 - CSS Framework: Tailwind CSS
 - Infra: Vercel Edge Pipeline (Automated Deploy via main branch)
 - Persistence Layer: Supabase Free Tier
-- Active Instance ID: ldkbbzdvtdsmbxfypwm
+- Active Instance ID: etmasufkgyviyvjwhgkp
 - CDN Storage: Bucket 'product-images' (Public SELECT enabled)
 
 ## Explicit CDN URL Construction Rule
