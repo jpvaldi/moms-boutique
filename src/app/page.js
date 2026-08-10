@@ -13,8 +13,8 @@ export default function Storefront() {
       condition: "Excelente Estado",
       price: 15000,
       images: [
-        "https://supabase.co",
-        "https://supabase.co"
+        "blusa_sonoma_front.jpg",
+        "blusa_sonoma_back.jpg"
       ]
     },
     {
@@ -24,9 +24,9 @@ export default function Storefront() {
       condition: "Como Nuevo",
       price: 22000,
       images: [
-        "https://supabase.co",
-        "https://supabase.co",
-        "https://supabase.co"
+        "vestido_elegante_front.jpg",
+        "vestido_elegante_back.jpg",
+        "vestido_elegante_detail.jpg"
       ]
     },
     {
@@ -36,7 +36,7 @@ export default function Storefront() {
       condition: "Excelente Estado",
       price: 35000,
       images: [
-        "https://supabase.co"
+        "chaqueta_cuerina_front.jpg"
       ]
     }
   ];
@@ -87,12 +87,12 @@ export default function Storefront() {
             <div key={product.id} className="bg-white rounded-2xl overflow-hidden border border-slate-100 shadow-sm hover:shadow-md transition-shadow duration-200 flex flex-col justify-between">
               <div>
                 {/* Photo Display */}
-                <div className="aspect-[3/4] bg-slate-100 relative overflow-hidden">
-                  <img 
-                    src={product.images[0]} 
-                    alt={product.name} 
-                    className="w-full h-full object-cover"
-                  />
+                        <div className="aspect-[3/4] bg-slate-100 relative overflow-hidden">
+          <img
+            src={`ldkbbzdvtdsmbxfypwm.supabase.co/storage/v1/object/public/product-images/${product.images}`}
+            alt={product.name || "Product image"}
+            className="w-full h-full object-cover"
+          />
                   <span className="absolute bottom-2 right-2 bg-slate-900/80 backdrop-blur-xs text-white text-[10px] px-2 py-0.5 rounded-md font-bold tracking-wide">
                     {product.condition}
                   </span>
@@ -103,7 +103,7 @@ export default function Storefront() {
                     {product.brand}
                   </span>
                   <h3 className="text-sm font-semibold text-slate-700 line-clamp-2 leading-snug h-10">
-                    {product.title}
+                    {product.name}
                   </h3>
                 </div>
               </div>
