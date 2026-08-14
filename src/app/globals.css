@@ -3,3 +3,15 @@
 body {
   background-color: #f8fafc; /* This is the hex code for slate-50 */
 }
+@layer utilities {
+  /* Premium UI Optimization: Completely hides ugly desktop native scroll tracks */
+  /* Hide scrollbar for Chrome, Safari, and Opera modern browser rendering engines */
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  /* Hide scrollbar for Internet Explorer, Edge legacy, and Firefox core layouts */
+  .no-scrollbar {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+  }
+}
