@@ -2,140 +2,121 @@
 
 import React, { useState } from "react";
 import CategoryNav from "@/components/storefront/CategoryNav";
-import { Eye } from "lucide-react";
 
-// ==========================================
-// UX CORE: LOCAL SANDBOX CATALOG ARRAY
-// ==========================================
+// 1. DATA MODEL: Synchronized with CategoryNav slugs
 const INITIAL_INVENTORY = [
+  // This item is placed at Index 0. It will ALWAYS show up first on home load!
   {
-    id: "prod-001",
-    brand: "SONOMA",
-    title: "Mujer Blusa Sonoma",
-    price: 15000,
-    // Maps exactly to the 'all' or 'new' category buttons
-    category: "new-arrivals", 
-    statusBadge: "Excelente Estado",
-    imageFileName: "blusa-sonoma-01.png"
+    id: "product-chaqueta",
+    title: "Chaqueta Cuerina William Rast",
+    category: "trending", // Fills the 'Trending Now' button
+    price: 89.90,
+    images: [
+      "/images/mujer-chaqueta-cuerina-williamrast.png" // Primary Cover Image
+    ]
   },
   {
-    id: "prod-002",
-    brand: "PREMIUM SELECTION",
-    title: "Mujer Vestido Elegante",
-    price: 22000,
-    // Maps exactly to the 'signature-sets' navigation slug
-    category: "signature-sets",
-    statusBadge: "Como Nuevo",
-    imageFileName: "mujer-vestido-01.png"
+    id: "product-blusa",
+    title: "Blusa Sonoma",
+    category: "new-arrivals", // Fills the 'New Arrivals' button
+    price: 45.00,
+    images: [
+      "/images/blusa-sonoma-01.png", // Primary Cover Image
+      "/images/blusa-sonoma-02.png"  // Multi-angle secondary asset
+    ]
   },
   {
-    id: "prod-003",
-    brand: "URBAN STYLE",
-    title: "Mujer Chaqueta Cuerina Black",
-    price: 35000,
-    // Maps exactly to the 'trending' navigation slug
-    category: "trending",
-    statusBadge: "Excelente Estado",
-    imageFileName: "mujer-chaqueta-cuerina-williamrast.png"
+    id: "product-vestido",
+    title: "Vestido Mujer Elegante",
+    category: "signature-sets", // Fills the 'Signature Sets' button
+    price: 120.00,
+    images: [
+      "/images/mujer-vestido-01.png", // Primary Cover Image
+      "/images/mujer-vestido-02.png", // Multi-angle secondary asset
+      "/images/mujer-vestido-03.png"  // Multi-angle tertiary asset
+    ]
   }
 ];
 
-export default function StorefrontPage() {
-  // State tracking which navigation slug is actively clicked by the buyer
+export default function Home() {
+  // Track active collection navigation state
   const [activeCategory, setActiveCategory] = useState("all");
 
-  // ==========================================
-  // REAL-TIME MEMORY FILTER COMPUTATION LAYER
-  // ==========================================
-  const filteredItems = activeCategory === "all" 
-    ? INITIAL_INVENTORY 
-    : INITIAL_INVENTORY.filter(item => item.category === activeCategory);
+  // Filtering Engine Mechanism
+  const filteredInventory = INITIAL_INVENTORY.filter((product) => {
+    if (activeCategory === "all") return true;
+    return product.category === activeCategory;
+  });
 
   return (
-    <div className="min-h-screen bg-slate-50/50 text-slate-900 selection:bg-purple-200">
-      
-      {/* LUXURIOUS BRANDING HEADER PLATFORM */}
-      <header className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 pb-4">
-        <h1 className="text-2xl font-black tracking-tight text-purple-950 font-serif uppercase">
-          BOUTIQUE DE MAMÁ
+    <main className="min-h-screen bg-neutral-50 px-4 py-8 md:px-8 max-w-7xl mx-auto">
+      {/* MOMS-BOUTIQUE Branding Header */}
+      <header className="mb-12 text-center">
+        <h1 className="text-4xl font-extrabold tracking-tight text-neutral-900 md:text-5xl">
+          MOMS-BOUTIQUE
         </h1>
+        <p className="mt-3 text-lg text-neutral-500">
+          Luxury Boutique Storefront Collection
+        </p>
       </header>
 
-      {/* MOUNTING THE DYNAMIC CATEGORY SLIDER COMPONENT */}
-      <CategoryNav 
-        initialActiveSlug="all" 
-        onCategoryChange={(slug) => setActiveCategory(slug)} 
-      />
+      {/* Category Navigation Leaf Node Mount */}
+      <div className="mb-8">
+        <CategoryNav 
+          onCategoryChange={(slug) => setActiveCategory(slug)} 
+          initialActiveSlug="all"
+        />
+      </div>
 
-      {/* CORE PRODUCT RENDERING ENGINE */}
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        
-        {/* Real-Time UX Meta Metadata Indicator */}
-        <div className="mb-6 flex items-center justify-between">
-          <p className="text-xs font-mono font-bold tracking-wider text-purple-950/40 uppercase">
-            Mostrando {filteredItems.length} prendas encontradas // Canal: {activeCategory}
+      {/* Dynamic Storefront Interactive Product Grid */}
+      {filteredInventory.length === 0 ? (
+        <div className="text-center py-24 bg-white rounded-2xl shadow-sm border border-neutral-100">
+          <p className="text-neutral-400 font-medium text-lg">
+            No products found in this category yet.
+          </p>
+          <p className="text-sm text-neutral-400 mt-1">
+            Stay tuned! More luxury arrivals are uploading soon.
           </p>
         </div>
-
-        {/* LUXURIOUS ITEM GRID LAYOUT */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-          {filteredItems.map((item) => (
-            <div 
-              key={item.id} 
-              className="group relative flex flex-col bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl hover:shadow-purple-950/5 border border-slate-100 transition-all duration-500 ease-out"
-            >
+      ) : (
+        <div className="grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-3 xl:gap-x-8">
+          {filteredInventory.map((product) => (
+            <div key={product.id} className="group relative bg-white border border-neutral-100 rounded-2xl p-4 shadow-sm hover:shadow-md transition-all duration-300">
               
-              {/* IMAGE HOLDER WRAPPER WITH BOUNDARY HOVER CLIPPING */}
-              <div className="relative aspect-[3/4] w-full bg-slate-100 overflow-hidden">
-                <img 
-                  src={`/images/${item.imageFileName}`} 
-                  alt={item.title}
-                  // Isolation micro-hover animation scaling engine
-                  className="w-full h-full object-cover object-center transform transition-transform duration-700 ease-out group-hover:scale-108"
+              {/* Image Container with Array-Safe Index Filtering */}
+              <div className="w-full h-80 bg-neutral-200 rounded-xl overflow-hidden aspect-w-1 aspect-h-1 group-hover:opacity-90 transition-opacity">
+                <img
+                  src={product.images[0]} // Always displays the primary array item cover first
+                  alt={product.title}
+                  className="w-full h-full object-cover object-center"
                 />
-                
-                {/* Micro-Animation Translucent Overlay */}
-                <div className="absolute inset-0 bg-purple-950/0 group-hover:bg-purple-950/20 transition-colors duration-500" />
-
-                {/* PREMIUM STATUS BADGE */}
-                <span className="absolute bottom-4 right-4 z-10 px-3 py-1.5 text-[11px] font-semibold font-mono tracking-wide text-white bg-purple-950/90 backdrop-blur-md rounded-md shadow-sm">
-                  {item.statusBadge}
-                </span>
               </div>
 
-              {/* CARD METRICS & METADATA FEED */}
-              <div className="flex flex-col flex-1 p-6 bg-white">
-                <div className="flex-1">
-                  <span className="text-[10px] font-bold font-mono tracking-widest text-purple-600 uppercase block mb-1">
-                    {item.brand}
-                  </span>
-                  <h3 className="text-base font-semibold text-slate-800 tracking-tight group-hover:text-purple-950 transition-colors duration-300">
-                    {item.title}
+              {/* Product Information Cards */}
+              <div className="mt-4 flex justify-between items-start">
+                <div>
+                  <h3 className="text-base font-semibold text-neutral-800 tracking-tight">
+                    {product.title}
                   </h3>
+                  <p className="mt-1 text-xs font-medium text-neutral-400 tracking-wider uppercase">
+                    {product.category.replace("-", " ")}
+                  </p>
                 </div>
-
-                {/* METRIC PRICE & CALL-TO-ACTION ALIGNMENT */}
-                <div className="mt-4 pt-4 border-t border-slate-100 flex items-center justify-between">
-                  <div className="flex flex-col">
-                    <span className="text-[10px] text-slate-400 font-medium uppercase tracking-wider">Precio</span>
-                    <span className="text-lg font-bold text-slate-900 font-mono">
-                      ${item.price.toLocaleString("es-CL")}
-                    </span>
-                  </div>
-
-                  <button className="flex items-center gap-2 px-4 py-2 bg-purple-950 text-white text-xs font-semibold rounded-lg hover:bg-purple-900 active:scale-95 transition-all duration-200 shadow-sm">
-                    <Eye className="w-3.5 h-3.5" />
-                    <span>Ver</span>
-                  </button>
-                </div>
-
+                <p className="text-base font-bold text-neutral-900">
+                  ${product.price.toFixed(2)}
+                </p>
               </div>
 
+              {/* Secondary View Badge Trigger indicator */}
+              {product.images.length > 1 && (
+                <div className="absolute top-6 right-6 bg-white/80 backdrop-blur-md px-2.5 py-1 rounded-full text-[10px] font-bold text-neutral-700 tracking-wider shadow-sm uppercase">
+                  +{product.images.length - 1} Views Available
+                </div>
+              )}
             </div>
           ))}
         </div>
-
-      </main>
-    </div>
+      )}
+    </main>
   );
 }
